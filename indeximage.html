@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: blueviolet;
+        }
+        .wrapper{
+            width: 450px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 9px;
+        }
+        .wrapper .upload-box{
+            height: 225px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 5px;
+            border: 2px dashed #afafaf;
+        }
+         .upload-box p{
+            font-size: 1.02rem;
+            margin-top: 20px;
+        }
+         .wrapper .content{
+            margin-top: 28px;
+         } 
+         .content .row{
+            display: flex;
+            justify-content: space-between;
+         }
+        .content .row .column{
+            width: calc(1005 / 2 -15px);
+        }
+        .row .column label{
+          font-size: 1.06rem;
+        }
+        .sizes .column input{
+            width: 100%;
+            height: 45px;
+            outline: none;
+            margin-top: 7px;
+            padding: 0 15px;
+            font-size: 1.06rem;
+            border-radius: 4px;
+            border: 1px solid #aaa;
+        }
+        .sizes .column input:focus{
+            padding: 0 14px;
+            border: 2px solid #9270fc;
+        }
+        .content  .checkboxes{
+            margin-top: 20px;
+        }
+        .checkboxes .column{
+            display: flex;
+            align-items: center;
+        }
+      .content .download-btn{
+        width: 100%;
+        color: #fff;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.06rem;
+        border-radius: 5px;
+        padding: 15px 0;
+        margin: 30px 0 10px;
+        background: #9270fc;
+        text-transform: uppercase;
+      }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="upload-box">
+            <input type="file" accept="image/" hidden>
+            <img src="./1403974191581426687-128.png" alt="">
+            <p>Browse file to upload</p>
+        </div>
+        <div class="content">
+            <div class="row sizes">
+                <div class="column width">
+                    <label for="">Width</label>
+                    <input type="number">
+                </div>
+                <div class="column height">
+                    <label for="">Height</label>
+                    <input type="number">
+                </div>
+            </div>
+            <div class="row checkboxes">
+               <div class="column ratio">
+               
+                <input type="checkbox" id="ratio">
+                <label for="ratio">Lock aspect ratio</label>
+               </div>
+               <div class="column quality">
+                <input type="checkbox" id="quality">
+                <label for="quality">Reduce quality</label>
+               </div>
+            </div>
+            <button class="download-btn">Download Image</button>
+        </div>
+    </div>
+    <script>
+       const uploadBox = document.querySelector(".upload-box"),
+       fileInput = uploadBox.querySelector("input");
+
+       const loadfile = (e){
+        const file = e.target.files[0]; 
+       }
+       fileInput.addEventListener("change",loadFile);
+       uploadBox.addEventListener("click", ( =>   fileInput.click))
+
+    </script>
+</body>
+</html>

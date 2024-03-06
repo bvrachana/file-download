@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #17A288;
+            min-height: 100vh;
+        }
+        .wrapper{
+            width: 450px;
+            border-radius: 7px;
+            background: #fff;
+            padding: 30px 25px 40px;
+        }
+        .wrapper :where(textarea, input, select,button){
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 17px;
+            border-radius: 5px;
+        }
+        .wrapper textarea{
+            height: 270px;
+            resize: none;
+            padding: 8px 13px;
+            border: 1px solid #ccc;
+        }
+        .wrapper .file-options{
+           display: flex;
+           margin-top: 10px;
+           align-items: center;
+           justify-content: space-between;
+        }
+        .file-options, .option{
+            width: calc(100% / 2 -8px);
+        }
+        .option :where(input,  .select-menu){
+            height: 50px;
+            padding: 0 15px;
+            margin-top: 6px;
+            border-radius: 5px;
+            border: 1px solid #bfbfbf;
+        }
+       
+        .option .select-menu select{
+            height: 50px;
+        }
+        .wrapper .save-btn{
+            margin-top: 20px;
+            padding: 16px 0;
+            background: #17A288;
+            cursor: pointer;
+            color: #fff;
+            opacity: 0.6;
+        }
+        .wrapper textarea:valid ~ .save-btn{
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+      <textarea required placeholder="Enter something to save"></textarea>  
+      <div class="file-options">
+      <div class="option file-name">
+      <label>File name</label>
+         <input type="text" placeholder="Enter file name">                                                                        
+        </div>
+        <div class="option save-as">
+            <label>Save as</label>
+            <div class="select-menu">
+                <select>
+                    <option value="text/plain">Text File (.txt)</option>
+                    <option value="text/javascript">JS File (.js)</option>
+                    <option value="text/html">HTML File (.html)</option>
+                    <option value="image/svg+xml">SVG  File (.svg)</option>
+                    <option value="application/msword">DOC File (.doc)</option>
+                    <option value="application/vnd.ms-powerpoint">PPT File (.ppt)</option>
+                </select>
+            </div>
+        </div>
+      </div>
+      <button class="save-btn">Save</button>
+    
+    </div>
+    <script>
+        const textarea = document.querySelector("textarea"),
+        fileNameInput =  document.querySelector(".file-name input"),
+        selectMenu = document.querySelector(".save-as select"),
+        saveBtn = document.querySelector(".save-btn");
+
+        selectMenu.addEventListener("change", ()=> {
+
+            //getting selected option text
+            let selectOption = selectMenu.options[selectMenu.selectedIndex].text
+            saveBtn.innerText = `save As ${selectedOption.split("")[0]} File`;
+        })
+
+        saveBtn.addEventListener("click", () => {
+            const blob = new Blob([textarea.value], {type: selectMenu.value});
+            //URL.createObjectURL creates a url that represent passed object
+            const fileUrl = URL.createObjectURL(blob);
+            const link = document.createElement("a");  //creating <a> tag
+                link.download = fileNameInput.value; //passing fileName as download value of the link
+                link.href = fileUrl; //passing fileUrl as href value of link
+                link.click(); // clicking link so the file download 
+        });
+    </script>
+</body>
+</html>
